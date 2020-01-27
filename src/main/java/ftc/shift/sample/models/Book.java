@@ -1,12 +1,15 @@
 package ftc.shift.sample.models;
 
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+@Entity
 public class Book {
     /**
      * Уникальный идентификатор книги
      */
-    private String id;
+    @Id
+    private long id;
 
     /**
      * Название книги
@@ -26,24 +29,25 @@ public class Book {
     /**
      * Список жанров
      */
-    private List<String> genre;
+
+    // private List<String> genre;
 
     public Book() {
     }
 
-    public Book(String id, String name, String author, Integer pages, List<String> genre) {
+    public Book(int id, String name, String author, Integer pages) {
         this.id = id;
         this.name = name;
         this.author = author;
         this.pages = pages;
-        this.genre = genre;
+//        this.genre = genre;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -71,11 +75,4 @@ public class Book {
         this.pages = pages;
     }
 
-    public List<String> getGenre() {
-        return genre;
-    }
-
-    public void setGenre(List<String> genre) {
-        this.genre = genre;
-    }
 }

@@ -22,71 +22,59 @@ public class BooksController {
     /**
      * Добавление новой книги
      *
-     * @param userId - Идентификатор пользователя
      * @param book   - Данные для новой книги (Название, автор, количество страниц, жанры)
      * @return Сохранённая книга с установленным {@link Book#getId()}
      */
     @PostMapping(BOOKS_PATH)
     public ResponseEntity<Book> createBook(
-            @RequestHeader("userId") String userId,
             @RequestBody Book book) {
-        Book result = service.createBook(userId, book);
+        Book result = service.createBook(book);
         return ResponseEntity.ok(result);
     }
 
     /**
      * Получение книги с указанным идентификатором
      *
-     * @param userId - Идентификатор пользователя
      * @param bookId - Идентификатор книги
      */
     @GetMapping(BOOKS_PATH + "/{bookId}")
     public ResponseEntity<Book> readBook(
-            @RequestHeader("userId") String userId,
-            @PathVariable String bookId) {
-        Book book = service.provideBook(userId, bookId);
+            @PathVariable Long bookId) {
+        Book book = service.provideBook(bookId);
         return ResponseEntity.ok(book);
     }
 
     /**
      * Обновление существующей книги
      *
-     * @param userId - Идентификатор пользователя
-     * @param bookId - Идентификатор книги, которую необходимо обновить
      * @param book   - Новые данные для книги (Название, автор, количество страниц, жанры)
      */
     @PatchMapping(BOOKS_PATH + "/{bookId}")
     public ResponseEntity<Book> updateBook(
-            @RequestHeader("userId") String userId,
-            @PathVariable String bookId,
             @RequestBody Book book) {
-        Book updatedBook = service.updateBook(userId, bookId, book);
+        Book updatedBook = service.updateBook(book);
         return ResponseEntity.ok(updatedBook);
     }
 
     /**
      * Удаление существующей книги
      *
-     * @param userId - Идентификатор пользователя
      * @param bookId - Идентификатор книги, которую необходимо удалить
      */
     @DeleteMapping(BOOKS_PATH + "/{bookId}")
     public ResponseEntity<?> deleteBook(
-            @RequestHeader("userId") String userId,
-            @PathVariable String bookId) {
-        service.deleteBook(userId, bookId);
+            @PathVariable Long bookId) {
+        service.deleteBook(bookId);
         return ResponseEntity.ok().build();
     }
 
     /**
      * Получение всех книг пользователя
      *
-     * @param userId - Идентификатор пользователя
      */
     @GetMapping(BOOKS_PATH)
-    public ResponseEntity<Collection<Book>> listBooks(
-            @RequestHeader("userId") String userId) {
-        Collection<Book> books = service.provideBooks(userId);
+    public ResponseEntity<Collection<Book>> listBooks() {
+        Collection<Book> books = service.provideBooks();
         return ResponseEntity.ok(books);
     }
 }
