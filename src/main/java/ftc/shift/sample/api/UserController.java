@@ -26,7 +26,7 @@ public class UserController {
         return ResponseEntity.ok(gson.toJson(result));
     }
 
-    @GetMapping("/add")
+    @GetMapping("/{userId}")
     public ResponseEntity<String> readUser(@PathVariable Long userId) {
         User user = repository.findById(userId).get();
         return ResponseEntity.ok(gson.toJson(user));

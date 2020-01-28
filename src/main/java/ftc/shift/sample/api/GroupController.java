@@ -3,6 +3,7 @@ package ftc.shift.sample.api;
 import com.google.gson.Gson;
 import ftc.shift.sample.models.Group;
 import ftc.shift.sample.repositories.GroupRepository;
+import ftc.shift.sample.repositories.SubscribeRepository;
 import ftc.shift.sample.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,11 +17,15 @@ public class GroupController {
 
     private GroupRepository groupRepository;
     private UserRepository userRepository;
+    private SubscribeRepository subscribeRepository;
     private Gson gson = new Gson();
     @Autowired
-    public GroupController(GroupRepository groupRepository, UserRepository userRepository) {
+    public GroupController(GroupRepository groupRepository,
+                           UserRepository userRepository,
+                           SubscribeRepository subscribeRepository) {
         this.groupRepository = groupRepository;
         this.userRepository = userRepository;
+        this.subscribeRepository = subscribeRepository;
     }
 
     @PostMapping
@@ -36,6 +41,12 @@ public class GroupController {
         Group book = groupRepository.findById(groupId).get();
         return ResponseEntity.ok(gson.toJson(book));
     }
+
+    /*@GetMapping("/subscribes/{group_id}")
+    public ResponseEntity<String> subscribes(@PathVariable(name = "group_id") Long groupId) {
+        subscribeRepository.findAllBy()
+        return ResponseEntity.ok(gson.toJson(book));
+    }*/
 
     @GetMapping
     public ResponseEntity<String> listGroups() {

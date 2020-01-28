@@ -37,17 +37,15 @@ public class MainController {
         return "index";
     }
 
-    @GetMapping("/subscribe/{group_id}")
-    public String subscribeToGroup(@PathVariable long group_id,
-                                   @RequestParam(required = false) Long user_id) {
-        if (user_id != null) {
-            User user = userRepository.findById(user_id).get();
-            Group group = groupRepository.findById(group_id).get();
-            Subscription subscription = new Subscription(user, group);
+    @GetMapping("/subscribe")
+    public String subscribeToGroup(@RequestParam(name = "group_id") long groupId,
+                                   @RequestParam(name = "user_id", required = false) Long userId) {
+        if (userId != null) {
+            Subscription subscription = new Subscription(userId, groupId);
             subscribeRepository.save(subscription);
-            return String.format("redirect:/api/v001/groups/%d", group_id);
+            return String.format("redirect:/api/v001/groups/%d", groupId);
         }
-        return String.format("redirect:/api/v001/users/add?%d", group_id);
+        return String.format("redirect:/api/v001/users/add?group_id=%d", groupId);
     }
 
     @GetMapping("/add")

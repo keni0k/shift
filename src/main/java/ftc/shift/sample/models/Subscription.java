@@ -16,16 +16,12 @@ public class Subscription {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("user_id")
-    User user;
+    long userId;
+    long groupId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("group_id")
-    Group group;
 
-    public Subscription(User user, Group group){
-        this.user = user;
-        this.group = group;
+    public Subscription(long userId, long groupId){
+        this.userId = userId;
+        this.groupId = groupId;
     }
 }
