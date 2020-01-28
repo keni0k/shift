@@ -1,9 +1,8 @@
 package ftc.shift.sample.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import ftc.shift.sample.Utils;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -21,8 +20,8 @@ public class Group {
 
     Integer countPeople;
 
-    public Group() {
-    }
+    public Group(){}
+
     public Group(String name, User creator, Integer countPeople) {
         this.name = name;
         this.creator = creator;
