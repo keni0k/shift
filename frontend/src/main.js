@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import App from './App.vue'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
 import VueRouter from 'vue-router'
-Vue.use(VueRouter)
+Vue.use(VueRouter, VueAxios, axios)
 /* eslint-disable no-new */
 import Main from './components/Main.vue'
 import Subscribe from './components/Subscribe.vue'

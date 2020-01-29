@@ -2,6 +2,7 @@ package ftc.shift.sample.controllers
 
 import com.google.gson.Gson
 import ftc.shift.sample.models.Group
+import ftc.shift.sample.models.User
 import ftc.shift.sample.repositories.GroupRepository
 import ftc.shift.sample.repositories.SubscribeRepository
 import ftc.shift.sample.repositories.UserRepository
@@ -19,6 +20,15 @@ class GroupController @Autowired constructor(private val groupRepository: GroupR
     fun createGroup(@RequestParam name: String?, @RequestParam count_people: Int,
                     @RequestParam user_id: Long): ResponseEntity<String> {
         val group = Group(name = name, creator = userRepository.findById(user_id).get(), countPeople = count_people)
+        val result = groupRepository.saveAndFlush(group)
+        return ResponseEntity.ok(result.link)
+    }
+
+    @PostMapping("/without_user_id")
+    fun createGroupWithoutUserId(@RequestParam name: String, @RequestParam count_people: Int,
+                                 @RequestParam user_name: String): ResponseEntity<String> {
+        val user = userRepository.saveAndFlush(User(user_name))
+        val group = Group(name = name, creator = userRepository.findById(user.id).get(), countPeople = count_people)
         val result = groupRepository.saveAndFlush(group)
         return ResponseEntity.ok(result.link)
     }

@@ -3,7 +3,6 @@
     <img src="./assets/logo.png">
     <header class="header">
         <h1>Welcome to Secret Santa!</h1>
-        <h4>By: <a href="https://vk.com/keni0k" target="_blank">@keni0k</a></h4>
     </header>
 
     <div class="accordion">
@@ -13,7 +12,7 @@
                 <div class="title">Присоединиться к группе</div>
             </router-link>
             <div class="content" v-bind:class="{ initial: isActive }">
-                Trere is a form
+                <router-view v-if="isActive"/>
             </div>
         </div>
 
@@ -23,12 +22,11 @@
                 <div class="title">Создать группу</div>
             </router-link>
             <div class="content" v-bind:class="{ initial: !isActive }">
-                <p>
-                    Trere is another form
-                </p>
+                <router-view v-if="!isActive"/>
             </div>
         </div>
     </div>
+  <footer><p>by: <a href="https://vk.com/keni0k" target="_blank">@keni0k</a></p></footer>
   </div>
 </template>
 
@@ -37,7 +35,7 @@ export default {
   name: 'app',
   data: function() {
     return {
-      isActive: true
+      isActive: this.$route.name === 'subscribe'
     };
   }
 }
@@ -58,25 +56,8 @@ export default {
 <style lang="scss">
   @import url(https://fonts.googleapis.com/css?family=Raleway:300);
 
-  @function random-color($min: 0, $max: 255, $alpha: 1) {
-      @if $min < 0 {
-          $min: -1;
-      } @else {
-          $min: $min - 1;
-      }
-      @if $max > 255 {
-          $max: 256;
-      } @else {
-          $max: $max + 1;
-      }
-      $red: random($max) + $min;
-      $green: random($max) + $min;
-      $blue: random($max) + $min;
-      @return rgba($red, $green, $blue, $alpha);
-  }
-
   $ultralight: #fefefe;
-  $primary: random-color($min: 100, $max: 100);
+  $primary: rgba(150, 140, 170, 1);
   $primary-light: mix(#ffffff, $primary, 25%);
   $primary-dark: mix(#000000, $primary, 25%);
 
