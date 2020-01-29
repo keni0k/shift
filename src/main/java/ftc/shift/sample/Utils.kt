@@ -1,13 +1,11 @@
-package ftc.shift.sample;
+package ftc.shift.sample
 
-import java.security.SecureRandom;
+object Utils {
 
-public class Utils {
+    const val BASE_URL = "https://secretsanta2020.herokuapp.com/subscribe/"
 
-    public static final String BASE_URL = "https://secretsanta2020.herokuapp.com/subscribe/";
-
-    public static String getLinkById(long id){
-        return BASE_URL + id;
+    fun getLinkById(id: Long): String {
+        return BASE_URL + id
     }
 
 }

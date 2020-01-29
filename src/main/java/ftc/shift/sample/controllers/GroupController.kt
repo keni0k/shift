@@ -1,45 +1,32 @@
-package ftc.shift.sample.api;
+package ftc.shift.sample.controllers
 
-import com.google.gson.Gson;
-import ftc.shift.sample.models.Group;
-import ftc.shift.sample.repositories.GroupRepository;
-import ftc.shift.sample.repositories.SubscribeRepository;
-import ftc.shift.sample.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Collection;
+import com.google.gson.Gson
+import ftc.shift.sample.models.Group
+import ftc.shift.sample.repositories.GroupRepository
+import ftc.shift.sample.repositories.SubscribeRepository
+import ftc.shift.sample.repositories.UserRepository
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/v001/groups")
-public class GroupController {
-
-    private GroupRepository groupRepository;
-    private UserRepository userRepository;
-    private SubscribeRepository subscribeRepository;
-    private Gson gson = new Gson();
-    @Autowired
-    public GroupController(GroupRepository groupRepository,
-                           UserRepository userRepository,
-                           SubscribeRepository subscribeRepository) {
-        this.groupRepository = groupRepository;
-        this.userRepository = userRepository;
-        this.subscribeRepository = subscribeRepository;
-    }
-
+class GroupController @Autowired constructor(private val groupRepository: GroupRepository,
+                                             private val userRepository: UserRepository,
+                                             private val subscribeRepository: SubscribeRepository) {
+    private val gson = Gson()
     @PostMapping
-    public ResponseEntity<String> createGroup(@RequestParam String name, @RequestParam int count_people,
-                                              @RequestParam long user_id) {
-        Group group = new Group(name, userRepository.findById(user_id).get(), count_people);
-        Group result = groupRepository.saveAndFlush(group);
-        return ResponseEntity.ok(result.getLink());
+    fun createGroup(@RequestParam name: String?, @RequestParam count_people: Int,
+                    @RequestParam user_id: Long): ResponseEntity<String> {
+        val group = Group(name = name, creator = userRepository.findById(user_id).get(), countPeople = count_people)
+        val result = groupRepository.saveAndFlush(group)
+        return ResponseEntity.ok(result.link)
     }
 
     @GetMapping("/{groupId}")
-    public ResponseEntity<String> readGroup(@PathVariable Long groupId) {
-        Group book = groupRepository.findById(groupId).get();
-        return ResponseEntity.ok(gson.toJson(book));
+    fun readGroup(@PathVariable groupId: Long): ResponseEntity<String> {
+        val book = groupRepository.findById(groupId).get()
+        return ResponseEntity.ok(gson.toJson(book))
     }
 
     /*@GetMapping("/subscribes/{group_id}")
@@ -47,22 +34,22 @@ public class GroupController {
         subscribeRepository.findAllBy()
         return ResponseEntity.ok(gson.toJson(book));
     }*/
-
     @GetMapping
-    public ResponseEntity<String> listGroups() {
-        Collection<Group> books = groupRepository.findAll();
-        return ResponseEntity.ok(gson.toJson(books));
+    fun listGroups(): ResponseEntity<String> {
+        val books: Collection<Group> = groupRepository.findAll()
+        return ResponseEntity.ok(gson.toJson(books))
     }
 
     @PatchMapping
-    public ResponseEntity<String> updateGroup(@RequestBody String json) {
-        Group updatedGroup = groupRepository.saveAndFlush(gson.fromJson(json, Group.class));
-        return ResponseEntity.ok(gson.toJson(updatedGroup));
+    fun updateGroup(@RequestBody json: String?): ResponseEntity<String> {
+        val updatedGroup = groupRepository.saveAndFlush(gson.fromJson(json, Group::class.java))
+        return ResponseEntity.ok(gson.toJson(updatedGroup))
     }
 
     @DeleteMapping("/{groupId}")
-    public ResponseEntity<?> deleteGroup(@PathVariable Long groupId) {
-        groupRepository.deleteById(groupId);
-        return ResponseEntity.ok().build();
+    fun deleteGroup(@PathVariable groupId: Long): ResponseEntity<*> {
+        groupRepository.deleteById(groupId)
+        return ResponseEntity.ok().build<Any>()
     }
+
 }

@@ -1,27 +1,25 @@
-package ftc.shift.sample;
+package ftc.shift.sample
 
-import org.springframework.stereotype.Component;
-
-import javax.servlet.*;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import org.springframework.stereotype.Component
+import java.io.IOException
+import javax.servlet.*
+import javax.servlet.http.HttpServletResponse
 
 /**
  * Конфигурация для добавления CORS заголовков
- * (Без необходимости не редактировать)
  */
 @Component
-public class SimpleCORSFilter implements Filter {
-	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
-		HttpServletResponse response = (HttpServletResponse) res;
-		response.setHeader("Access-Control-Allow-Origin", "*");
-		response.setHeader("Access-Control-Allow-Methods", "POST, GET, PATCH, DELETE");
-		response.setHeader("Access-Control-Max-Age", "3600");
-		response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
-		chain.doFilter(req, res);
-	}
+class SimpleCORSFilter : Filter {
+    @Throws(IOException::class, ServletException::class)
+    override fun doFilter(req: ServletRequest, res: ServletResponse, chain: FilterChain) {
+        val response = res as HttpServletResponse
+        response.setHeader("Access-Control-Allow-Origin", "*")
+        response.setHeader("Access-Control-Allow-Methods", "POST, GET, PATCH, DELETE")
+        response.setHeader("Access-Control-Max-Age", "3600")
+        response.setHeader("Access-Control-Allow-Headers", "x-requested-with")
+        chain.doFilter(req, res)
+    }
 
-	public void init(FilterConfig filterConfig) {}
-
-	public void destroy() {}
+    override fun init(filterConfig: FilterConfig) {}
+    override fun destroy() {}
 }
