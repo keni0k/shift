@@ -16,7 +16,7 @@ class MainController @Autowired constructor(private val groupRepository: GroupRe
                                             private val userRepository: UserRepository,
                                             private val subscribeRepository: SubscribeRepository) {
     private val gson = Gson()
-    @GetMapping
+    @GetMapping("/", "/add", "subscribe")
     fun index(modelMap: ModelMap?): String {
         return "index"
     }
@@ -32,9 +32,8 @@ class MainController @Autowired constructor(private val groupRepository: GroupRe
         return String.format("redirect:/api/v001/users/add?group_id=%d", groupId)
     }
 
-    @GetMapping("/add")
+    /*@GetMapping("/add")
     fun createUser(@RequestParam group_id: Long?): String {
-        return "add"
-    }
-
+        return "index"
+    }*/
 }

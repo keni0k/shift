@@ -4,13 +4,14 @@ import App from './App.vue'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 /* eslint-disable no-new */
-import Hello from './components/HelloWorld.vue'
-import About from './components/About.vue'
-
+import Main from './components/Main.vue'
+import Subscribe from './components/Subscribe.vue'
+import AddGroup from './components/AddGroup.vue'
 
 const routes = [
-	{ path: '/', component: Hello },
-	{ path: '/about', component: About }
+	{ path: '/', component: Main },
+	{ path: '/subscribe', component: Subscribe },
+  { path: '/add', component: AddGroup }
 ]
 
 const router = new VueRouter({
