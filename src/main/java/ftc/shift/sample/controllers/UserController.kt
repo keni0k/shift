@@ -22,6 +22,7 @@ class UserController @Autowired constructor(private val repository: UserReposito
         val user = repository.findById(userId).get()
         return ResponseEntity.ok(gson.toJson(user))
     }
+    
 
     @GetMapping
     fun listUsers(): ResponseEntity<String> {
