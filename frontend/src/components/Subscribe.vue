@@ -6,7 +6,7 @@
         <input type="text" class="form-control" id="group_link" v-model="group_link">
       </div>
       <div class="col-md-4">
-        <button class="btn btn-primary" v-on:click="get_group()" 
+        <button class="btn btn-primary invite-btn" v-on:click="get_group()" 
                 type="button">Найти</button>
       </div>
     </div>
@@ -85,5 +85,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+button.btn.invite-btn {
+  margin-top: 36px;
+  display: block;
 }
 </style>
