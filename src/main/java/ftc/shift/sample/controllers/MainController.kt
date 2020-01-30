@@ -19,7 +19,7 @@ class MainController @Autowired constructor(private val groupRepository: GroupRe
                                             private val userRepository: UserRepository,
                                             private val subscribeRepository: SubscribeRepository) {
     private val gson = Gson()
-    @GetMapping("/", "/add", "/subscribe")
+    @GetMapping("/", "/add", "/subscribe", "/manage")
     fun index(): String {
         return "index"
     }

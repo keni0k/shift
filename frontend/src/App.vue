@@ -6,23 +6,33 @@
     </header>
 
     <div class="accordion">
-        <div v-bind:class="{ active: isActive }" class="accordion-item"
-        v-on:click="isActive = true">
-            <router-link to="/subscribe" class="heading">
-                <div class="title">Присоединиться к группе</div>
+      <div v-bind:class="{ active: item == 'manage' }" class="accordion-item"
+        v-on:click="item = 'manage'">
+            <router-link to="/manage" class="heading">
+                <div class="title">Управлять группой</div>
             </router-link>
-            <div class="content" v-bind:class="{ initial: isActive }">
-                <router-view v-if="isActive"/>
+            <div class="content" v-bind:class="{ initial: item == 'manage' }">
+                <router-view v-if="item == 'manage'"/>
             </div>
         </div>
 
-        <div v-bind:class="{ active: !isActive }" class="accordion-item"
-        v-on:click="isActive = false">
+        <div v-bind:class="{ active: item == 'subscribe' }" class="accordion-item"
+        v-on:click="item = 'subscribe'">
+            <router-link to="/subscribe" class="heading">
+                <div class="title">Присоединиться к группе</div>
+            </router-link>
+            <div class="content" v-bind:class="{ initial: item == 'subscribe' }">
+                <router-view v-if="item == 'subscribe'"/>
+            </div>
+        </div>
+
+        <div v-bind:class="{ active: item == 'add' }" class="accordion-item"
+        v-on:click="item = 'add'">
             <router-link to="/add" class="heading">
                 <div class="title">Создать группу</div>
             </router-link>
-            <div class="content" v-bind:class="{ initial: !isActive }">
-                <router-view v-if="!isActive"/>
+            <div class="content" v-bind:class="{ initial: item == 'add' }">
+                <router-view v-if="item == 'add'"/>
             </div>
         </div>
     </div>
@@ -35,7 +45,7 @@ export default {
   name: 'app',
   data: function() {
     return {
-      isActive: this.$route.name === 'subscribe'
+      item: this.$route.name
     };
   }
 }
