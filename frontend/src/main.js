@@ -11,9 +11,9 @@ import Subscribe from './components/Subscribe.vue'
 import AddGroup from './components/AddGroup.vue'
 
 const routes = [
-	{ path: '/', component: Main },
-	{ path: '/subscribe', component: Subscribe },
-  { path: '/add', component: AddGroup }
+	{ path: '/', component: Main, name: 'main' },
+	{ path: '/subscribe', component: Subscribe, name: 'subscribe' },
+  { path: '/add', component: AddGroup, name: 'add' }
 ]
 
 const router = new VueRouter({

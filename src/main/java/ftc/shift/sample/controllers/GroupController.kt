@@ -35,8 +35,8 @@ class GroupController @Autowired constructor(private val groupRepository: GroupR
 
     @GetMapping("/{groupId}")
     fun readGroup(@PathVariable groupId: Long): ResponseEntity<String> {
-        val book = groupRepository.findById(groupId).get()
-        return ResponseEntity.ok(gson.toJson(book))
+        val group = groupRepository.findById(groupId).get()
+        return ResponseEntity.ok(gson.toJson(group))
     }
 
     /*@GetMapping("/subscribes/{group_id}")
@@ -46,8 +46,8 @@ class GroupController @Autowired constructor(private val groupRepository: GroupR
     }*/
     @GetMapping
     fun listGroups(): ResponseEntity<String> {
-        val books: Collection<Group> = groupRepository.findAll()
-        return ResponseEntity.ok(gson.toJson(books))
+        val groups: Collection<Group> = groupRepository.findAll()
+        return ResponseEntity.ok(gson.toJson(groups))
     }
 
     @PatchMapping
