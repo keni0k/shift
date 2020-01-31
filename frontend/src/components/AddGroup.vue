@@ -103,7 +103,6 @@
     form .form-group {
         text-align: left;
     }
-
     .modal-mask {
         position: fixed;
         z-index: 9998;
@@ -115,23 +114,19 @@
         display: table;
         transition: opacity .3s ease;
     }
-
     .modal-wrapper {
         display: table-cell;
         vertical-align: middle;
     }
-
     #exampleModal {
         color: black;
     }
-
     #circularG {
         position: relative;
         width: 58px;
         height: 58px;
         margin: auto;
     }
-
     .circularG {
         position: absolute;
         background-color: rgb(0, 0, 0);
@@ -163,7 +158,6 @@
         -webkit-animation-direction: normal;
         -moz-animation-direction: normal;
     }
-
     #circularG_1 {
         left: 0;
         top: 23px;
@@ -173,7 +167,6 @@
         -webkit-animation-delay: 0.41s;
         -moz-animation-delay: 0.41s;
     }
-
     #circularG_2 {
         left: 6px;
         top: 6px;
@@ -183,7 +176,6 @@
         -webkit-animation-delay: 0.55s;
         -moz-animation-delay: 0.55s;
     }
-
     #circularG_3 {
         top: 0;
         left: 23px;
@@ -193,7 +185,6 @@
         -webkit-animation-delay: 0.69s;
         -moz-animation-delay: 0.69s;
     }
-
     #circularG_4 {
         right: 6px;
         top: 6px;
@@ -203,7 +194,6 @@
         -webkit-animation-delay: 0.83s;
         -moz-animation-delay: 0.83s;
     }
-
     #circularG_5 {
         right: 0;
         top: 23px;
@@ -213,7 +203,6 @@
         -webkit-animation-delay: 0.97s;
         -moz-animation-delay: 0.97s;
     }
-
     #circularG_6 {
         right: 6px;
         bottom: 6px;
@@ -223,7 +212,6 @@
         -webkit-animation-delay: 1.1s;
         -moz-animation-delay: 1.1s;
     }
-
     #circularG_7 {
         left: 23px;
         bottom: 0;
@@ -233,7 +221,6 @@
         -webkit-animation-delay: 1.24s;
         -moz-animation-delay: 1.24s;
     }
-
     #circularG_8 {
         left: 6px;
         bottom: 6px;
@@ -243,53 +230,42 @@
         -webkit-animation-delay: 1.38s;
         -moz-animation-delay: 1.38s;
     }
-
-
     @keyframes bounce_circularG {
         0% {
             transform: scale(1);
         }
-
         100% {
             transform: scale(.3);
         }
     }
-
     @-o-keyframes bounce_circularG {
         0% {
             -o-transform: scale(1);
         }
-
         100% {
             -o-transform: scale(.3);
         }
     }
-
     @-ms-keyframes bounce_circularG {
         0% {
             -ms-transform: scale(1);
         }
-
         100% {
             -ms-transform: scale(.3);
         }
     }
-
     @-webkit-keyframes bounce_circularG {
         0% {
             -webkit-transform: scale(1);
         }
-
         100% {
             -webkit-transform: scale(.3);
         }
     }
-
     @-moz-keyframes bounce_circularG {
         0% {
             -moz-transform: scale(1);
         }
-
         100% {
             -moz-transform: scale(.3);
         }

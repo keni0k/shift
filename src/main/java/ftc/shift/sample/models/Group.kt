@@ -16,5 +16,5 @@ data class Group(
                     var finished: Boolean? = false
                 ) {
     val link: String
-        get() = Utils.getLinkById(id)
+        get() = Utils.getLinkById(id)!!
 }

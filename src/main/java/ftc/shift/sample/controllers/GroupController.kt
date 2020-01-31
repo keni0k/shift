@@ -1,6 +1,7 @@
 package ftc.shift.sample.controllers
 
 import com.google.gson.Gson
+import ftc.shift.sample.Utils
 import ftc.shift.sample.models.Group
 import ftc.shift.sample.models.Subscription
 import ftc.shift.sample.models.User
@@ -8,8 +9,11 @@ import ftc.shift.sample.repositories.GroupRepository
 import ftc.shift.sample.repositories.SubscribeRepository
 import ftc.shift.sample.repositories.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.client.RestTemplate
+import org.springframework.web.servlet.view.RedirectView
 
 @RestController
 @RequestMapping("/api/v001/groups")
@@ -32,6 +36,19 @@ class GroupController @Autowired constructor(private val groupRepository: GroupR
         val group = Group(name = name, creator = userRepository.findById(user.id).get(), countPeople = count_people)
         val result = groupRepository.saveAndFlush(group)
         return ResponseEntity.ok(result.link)
+    }
+
+    @GetMapping("/get_qr_link/{group_id}")
+    fun getQrCodeLink(@PathVariable(name = "group_id") groupId : Long) : ResponseEntity<String> {
+        val link = groupRepository.findById(groupId).get().link
+
+        return ResponseEntity.ok("https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=$link")
+    }
+
+    @GetMapping("/get_qr_img/{group_id}")
+    fun getQrCodeImage(@PathVariable(name = "group_id") groupId: Long) : RedirectView {
+        val link = groupRepository.findById(groupId).get().link
+        return RedirectView("https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=$link")
     }
 
     @GetMapping("/{groupId}")
