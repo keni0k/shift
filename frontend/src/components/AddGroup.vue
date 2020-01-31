@@ -1,7 +1,7 @@
 <template>
   <form>
     <div class="row">
-      <div class="form-group col-md-5">
+      <div class="form-group col-md-4">
         <label for="user_name">Ваше имя</label>
         <input type="text" class="form-control" id="user_name" v-model="user_name">
       </div>
@@ -9,13 +9,13 @@
         <label for="group_name">Название группы</label>
         <input type="text" class="form-control" id="group_name" v-model="group_name">
       </div>
-      <div class="form-group col-md-3">
-        <label for="count_people">Количество человек</label>
+      <div class="form-group col-md-2">
+        <label for="count_people" style="font-size: 0.9rem">Количество людей</label>
         <input type="number" class="form-control" id="count_people" v-model.number="count_people">
       </div>
-    </div>
-    <div class="row col-sm-12">
-      <button class="btn btn-primary" v-on:click="add_group()" type="button">Создать</button>
+      <div class="col-md-2">
+        <button class="btn btn-primary invite-btn" v-on:click="add_group()" type="button">Создать</button>
+      </div>
     </div>
   </form>
 </template>
