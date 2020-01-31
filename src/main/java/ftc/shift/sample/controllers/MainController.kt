@@ -43,13 +43,13 @@ class MainController @Autowired constructor(private val groupRepository: GroupRe
 
     @GetMapping("/subscription/{group_id}")
     fun subscribeWithoutUser(@PathVariable(name = "group_id") groupId: Long,
-                                    @RequestParam(name = "user_name", required = false) userName: String?,
-                                    @RequestParam(name = "user_likes", required = false) likes: String?,
-                                    @RequestParam(name = "user_dislikes", required = false) dislikes: String?): ResponseEntity<String> {
+                            @RequestParam(name = "user_name", required = false) userName: String?,
+                            @RequestParam(name = "user_likes", required = false) likes: String?,
+                            @RequestParam(name = "user_dislikes", required = false) dislikes: String?): ResponseEntity<String> {
         if (userName == null || likes == null || dislikes == null)
             return ResponseEntity.ok(gson.toJson(groupRepository.findById(groupId)))
         val user = userRepository.saveAndFlush(User(userName, likes, dislikes))
-        val subscription = subscribeRepository.saveAndFlush(Subscription(user.id, groupId))
+        val subscription = subscribeRepository.saveAndFlush(Subscription(user=user, group=groupRepository.findById(groupId).get()))
         return ResponseEntity.ok(gson.toJson(subscription))
     }
     
