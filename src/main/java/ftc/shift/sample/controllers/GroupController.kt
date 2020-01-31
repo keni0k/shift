@@ -2,6 +2,7 @@ package ftc.shift.sample.controllers
 
 import com.google.gson.Gson
 import ftc.shift.sample.models.Group
+import ftc.shift.sample.models.Subscription
 import ftc.shift.sample.models.User
 import ftc.shift.sample.repositories.GroupRepository
 import ftc.shift.sample.repositories.SubscribeRepository
@@ -39,6 +40,12 @@ class GroupController @Autowired constructor(private val groupRepository: GroupR
         return ResponseEntity.ok(gson.toJson(group))
     }
 
+    @GetMapping("/users/{group_id}")
+    fun getSubscribes(@PathVariable("group_id") groupId: Long): ResponseEntity<String> {
+        val subs = subscribeRepository.findByGroupId(groupId)
+        val users = subs.map { it.user }
+        return ResponseEntity.ok(gson.toJson(users))
+    }
 
     @GetMapping
     fun listGroups(): ResponseEntity<String> {
