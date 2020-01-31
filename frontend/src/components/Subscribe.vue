@@ -1,11 +1,11 @@
 <template>
   <form>
     <div class="row">
-      <div class="form-group col-md-8">
+      <div class="form-group col-md-6 mx-auto">
         <label for="group_link">Пригласительная ссылка</label>
         <input type="text" class="form-control" id="group_link" v-model="group_link">
       </div>
-      <div class="col-md-4">
+      <div class="col-md-2 mx-auto">
         <button class="btn btn-primary invite-btn" v-on:click="get_group()" 
                 type="button">Найти</button>
       </div>
@@ -85,9 +85,5 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-}
-button.btn.invite-btn {
-  margin-top: 36px;
-  display: block;
 }
 </style>

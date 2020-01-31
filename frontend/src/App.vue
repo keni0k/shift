@@ -1,38 +1,28 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <img src="https://www.mysecretsanta.me/assets/i/snowflake.png" class="app-img">
     <header class="header">
         <h1>Welcome to Secret Santa!</h1>
     </header>
 
     <div class="accordion">
-      <div v-bind:class="{ active: item == 'manage' }" class="accordion-item"
-        v-on:click="item = 'manage'">
-            <router-link to="/manage" class="heading">
-                <div class="title">Управлять группой</div>
-            </router-link>
-            <div class="content" v-bind:class="{ initial: item == 'manage' }">
-                <router-view v-if="item == 'manage'"/>
-            </div>
-        </div>
-
-        <div v-bind:class="{ active: item == 'subscribe' }" class="accordion-item"
-        v-on:click="item = 'subscribe'">
+        <div v-bind:class="{ active: isActive }" class="accordion-item"
+        v-on:click="isActive = true">
             <router-link to="/subscribe" class="heading">
                 <div class="title">Присоединиться к группе</div>
             </router-link>
-            <div class="content" v-bind:class="{ initial: item == 'subscribe' }">
-                <router-view v-if="item == 'subscribe'"/>
+            <div class="content" v-bind:class="{ initial: isActive }">
+                <router-view v-if="isActive"/>
             </div>
         </div>
 
-        <div v-bind:class="{ active: item == 'add' }" class="accordion-item"
-        v-on:click="item = 'add'">
+        <div v-bind:class="{ active: !isActive }" class="accordion-item"
+        v-on:click="isActive = false">
             <router-link to="/add" class="heading">
                 <div class="title">Создать группу</div>
             </router-link>
-            <div class="content" v-bind:class="{ initial: item == 'add' }">
-                <router-view v-if="item == 'add'"/>
+            <div class="content" v-bind:class="{ initial: !isActive }">
+                <router-view v-if="!isActive"/>
             </div>
         </div>
     </div>
@@ -45,7 +35,7 @@ export default {
   name: 'app',
   data: function() {
     return {
-      item: this.$route.name
+      isActive: this.$route.name === 'subscribe'
     };
   }
 }
@@ -56,8 +46,22 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  color: ghostwhite;
+  background-repeat: round;
+  background-image: url(https://www.mysecretsanta.me/assets/i/slider/4.jpg);
+}
+img.app-img{
+    margin-top: 60px;
+}
+button.btn.invite-btn {
+  margin-top: 36px;
+  display: block;
+  border: 2px solid #FFF;
+  color: #FFF !important;
+  padding-right: 20px;
+  padding-left: 20px;
+  text-decoration: none;
+  background-color: transparent;
 }
 .accordion-item .content.initial {
   display: initial;
@@ -124,7 +128,7 @@ export default {
           display: block;
           text-transform: uppercase;
           text-decoration: none;
-          color: $primary-dark;
+          color: #ddd6ea;
           font-weight: 700;
           font-size: 1rem;
           position: relative;
