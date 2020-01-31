@@ -1,12 +1,10 @@
 <template>
   <form>
     <div class="row">
-      <div class="form-group col-md-6 mx-auto">
+      <div class="form-group col-md-8 mx-auto subscribe">
         <label for="group_link">Пригласительная ссылка</label>
         <input type="text" class="form-control" id="group_link" v-model="group_link">
-      </div>
-      <div class="col-md-2 mx-auto">
-        <button class="btn btn-primary invite-btn" v-on:click="get_group()" 
+        <button class="btn btn-primary invite-btn" v-on:click="get_group()"
                 type="button">Найти</button>
       </div>
     </div>
@@ -35,7 +33,7 @@
 <script>
 import Vue from 'vue'
 import axios from 'axios'
-Vue.prototype.$axios = axios
+Vue.prototype.$axios = axios;
 export default {
   name: 'subscription',
   data: function() {
@@ -64,7 +62,7 @@ export default {
           'user_likes': this.user_likes, 
           'user_dislikes': this.user_dislikes
         }
-      }
+      };
       axios.get(this.group_link, config)
         .then(function () {
           alert('Отлично! Ожидайте распределения..');
@@ -78,12 +76,18 @@ export default {
 </script>
 <!-- styling for the component -->
 <style scoped>
-#about {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  .subscribe label{
+    display: block;
+    margin-right: 130px;
+    margin-bottom: .5rem;
+  }
+  .subscribe button.btn.invite-btn{
+    display: inline;
+    margin: 0;
+  }
+  .subscribe input.form-control{
+    display: inline;
+    width: 60%;
+    margin-right: 40px;
+  }
 </style>
