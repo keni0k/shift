@@ -58,7 +58,7 @@
                                     </div>
                                 </div>
                                 <div v-if="user != null">
-                                    {{ user }}
+                                    <p>{{ user }}</p>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -114,7 +114,6 @@
                 axios.get(this.group_link, config)
                     .then(function (response) {
                         self.showModal = true;
-                        alert(response.data);
                         self.user_id = parseInt(response.data)
                     })
                     .catch(function () {
@@ -131,7 +130,7 @@
             },
             getTarget() {
                 let self = this;
-                axios.get('https://secretsanta2020.herokuapp.com/api/v001/users/' + self.user_id)
+                axios.get('https://secretsanta2020.herokuapp.com/target/' + self.user_id)
                     .then((res) => {
                         self.user = JSON.parse(res.data);
                         this.stopTimer();

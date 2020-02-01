@@ -63,10 +63,10 @@ class MainController @Autowired constructor(private val groupRepository: GroupRe
     @GetMapping("/target/{user_id}")
     fun getUserTarget(@PathVariable(name = "user_id") userId: Long): ResponseEntity<User?> {
         val target = subscribeRepository.findById(userId).get().target
-        if (target != null) {
-            return ResponseEntity.ok(target)
+        return if (target != null) {
+            ResponseEntity.ok(target)
         } else {
-            throw NotFoundException()
+            ResponseEntity.ok(null)
         }
     }
 

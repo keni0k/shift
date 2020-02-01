@@ -36,7 +36,7 @@
                             <div class="modal-body">
                                 <div>Ссылка: <a v-bind:href="link_to_subscribe"> {{ link_to_subscribe.substr(8) }} </a>
                                 </div>
-                                <img src=""/>
+                                <img v-bind:src="'/api/v001/groups/get_qr_link/' + group_id"/>
                                 <div id="circularG" >
                                     <div id="circularG_1" class="circularG"></div>
                                     <div id="circularG_2" class="circularG"></div>
@@ -74,7 +74,8 @@
                 user_name: "",
                 group_name: "",
                 count_people: 0,
-                link_to_subscribe: ""
+                link_to_subscribe: "",
+                group_id: null
             }
         },
         methods: {
@@ -86,8 +87,9 @@
                 })
                     .then(response => {
                         self.showModal = true;
-                        self.link_to_subscribe = response.data
-
+                        let group = JSON.parse(response.data);
+                        self.link_to_subscribe = group.URL;
+                        self.group_id = group.id;
                     });
             },
             startTransitionModal() {

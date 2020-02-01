@@ -35,7 +35,8 @@ class GroupController @Autowired constructor(private val groupRepository: GroupR
         val user = userRepository.saveAndFlush(User(user_name))
         val group = Group(name = name, creator = userRepository.findById(user.id).get(), countPeople = count_people)
         val result = groupRepository.saveAndFlush(group)
-        return ResponseEntity.ok(result.link)
+        result.URL = result.link
+        return ResponseEntity.ok(gson.toJson(result))
     }
 
     @GetMapping("/get_qr_link/{group_id}")
