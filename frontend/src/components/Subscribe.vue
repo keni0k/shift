@@ -45,18 +45,23 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <div v-if="user == null">Ожидайте распределение</div>
-                                <div id="circularG">
-                                    <div id="circularG_1" class="circularG"></div>
-                                    <div id="circularG_2" class="circularG"></div>
-                                    <div id="circularG_3" class="circularG"></div>
-                                    <div id="circularG_4" class="circularG"></div>
-                                    <div id="circularG_5" class="circularG"></div>
-                                    <div id="circularG_6" class="circularG"></div>
-                                    <div id="circularG_7" class="circularG"></div>
-                                    <div id="circularG_8" class="circularG"></div>
+                                <div v-if="user == null">Ожидайте распределение
+                                    <div id="circularG">
+                                        <div id="circularG_1" class="circularG"></div>
+                                        <div id="circularG_2" class="circularG"></div>
+                                        <div id="circularG_3" class="circularG"></div>
+                                        <div id="circularG_4" class="circularG"></div>
+                                        <div id="circularG_5" class="circularG"></div>
+                                        <div id="circularG_6" class="circularG"></div>
+                                        <div id="circularG_7" class="circularG"></div>
+                                        <div id="circularG_8" class="circularG"></div>
+                                    </div>
+                                </div>
+                                <div v-if="user != null">
+                                    {{ user }}
                                 </div>
                             </div>
+
 
                             <div class="modal-footer">
                                 <button class="btn btn-secondary" @click="showModal = false">Выйти</button>
@@ -111,6 +116,7 @@
                 axios.get(this.group_link, config)
                     .then(function (response) {
                         self.showModal = true;
+                        alert(response.data);
                         self.user_id = parseInt(response.data)
                     })
                     .catch(function () {
@@ -128,7 +134,7 @@
             getTarget() {
                 axios.get('https://secretsanta2020.herokuapp.com/api/v001/users/' + this.user_id)
                     .then((res) => {
-                        this.currentData = res.data[0] //TODO
+                        this.user = JSON.parse(res.data) //TODO
                     })
             },
             stopTimer() {
