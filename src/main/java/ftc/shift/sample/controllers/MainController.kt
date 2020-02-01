@@ -55,7 +55,7 @@ class MainController @Autowired constructor(private val groupRepository: GroupRe
             return ResponseEntity.ok(gson.toJson(groupRepository.findById(groupId)))
         val user = userRepository.saveAndFlush(User(userName, likes, dislikes))
         val subscription = subscribeRepository.saveAndFlush(Subscription(user = user, group = groupRepository.findById(groupId).get()))
-        return ResponseEntity.ok(gson.toJson(subscription))
+        return ResponseEntity.ok(user.id.toString())
     }
 
     @GetMapping("/target/{user_id}")
