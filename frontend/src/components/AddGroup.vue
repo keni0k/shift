@@ -34,9 +34,9 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <div>Ссылка: <a v-bind:href="link_to_subscribe"> {{ link_to_subscribe.substr(8) }} </a>
+                                <div>Ссылка: <a v-bind:href="link_to_subscribe"> {{ link_to_subscribe }} </a>
                                 </div>
-                                <img v-bind:src="'/api/v001/groups/get_qr_link/' + group_id"/>
+                                <img v-bind:src="'/api/v001/groups/get_qr_img/' + group_id"/>
                                 <div id="circularG" >
                                     <div id="circularG_1" class="circularG"></div>
                                     <div id="circularG_2" class="circularG"></div>
@@ -87,7 +87,7 @@
                 })
                     .then(response => {
                         self.showModal = true;
-                        let group = JSON.parse(response.data);
+                        let group = response.data;
                         self.link_to_subscribe = group.URL;
                         self.group_id = group.id;
                     });

@@ -61,12 +61,12 @@ class MainController @Autowired constructor(private val groupRepository: GroupRe
     }
 
     @GetMapping("/target/{user_id}")
-    fun getUserTarget(@PathVariable(name = "user_id") userId: Long): ResponseEntity<User?> {
+    fun getUserTarget(@PathVariable(name = "user_id") userId: Long): ResponseEntity<Any?> {
         val target = subscribeRepository.findById(userId).get().target
         return if (target != null) {
             ResponseEntity.ok(target)
         } else {
-            ResponseEntity.ok(null)
+            ResponseEntity.ok(gson.toJson(null))
         }
     }
 

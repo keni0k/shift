@@ -132,7 +132,7 @@
                 let self = this;
                 axios.get('https://secretsanta2020.herokuapp.com/target/' + self.user_id)
                     .then((res) => {
-                        self.user = JSON.parse(res.data);
+                        self.user = res.data;
                         this.stopTimer();
                     })
             },
