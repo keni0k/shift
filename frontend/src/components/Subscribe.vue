@@ -61,8 +61,6 @@
                                     {{ user }}
                                 </div>
                             </div>
-
-
                             <div class="modal-footer">
                                 <button class="btn btn-secondary" @click="showModal = false">Выйти</button>
                             </div>
@@ -132,9 +130,11 @@
                 this.$refs.modal.classList.toggle("show");
             },
             getTarget() {
-                axios.get('https://secretsanta2020.herokuapp.com/api/v001/users/' + this.user_id)
+                let self = this;
+                axios.get('https://secretsanta2020.herokuapp.com/api/v001/users/' + self.user_id)
                     .then((res) => {
-                        this.user = JSON.parse(res.data) //TODO
+                        self.user = JSON.parse(res.data);
+                        this.stopTimer();
                     })
             },
             stopTimer() {

@@ -36,6 +36,7 @@
                             <div class="modal-body">
                                 <div>Ссылка: <a v-bind:href="link_to_subscribe"> {{ link_to_subscribe.substr(8) }} </a>
                                 </div>
+                                <img src=""/>
                                 <div id="circularG" >
                                     <div id="circularG_1" class="circularG"></div>
                                     <div id="circularG_2" class="circularG"></div>
