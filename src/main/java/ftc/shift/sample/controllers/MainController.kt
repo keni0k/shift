@@ -29,6 +29,11 @@ class MainController @Autowired constructor(private val groupRepository: GroupRe
     }
 
     @GetMapping("/subscribe/{group_id}")
+    fun subscribeView(@PathVariable(name = "group_id") groupId: Long): String {
+        return "index"
+    }
+
+   /* @GetMapping("/subscribe/{group_id}")
     fun subscribeToGroup(@PathVariable(name = "group_id") groupId: Long,
                          @RequestParam(name = "user_id") userId: Long): ResponseEntity<String> {
         val group = groupRepository.findById(groupId).get()
@@ -39,22 +44,22 @@ class MainController @Autowired constructor(private val groupRepository: GroupRe
         val subscription = Subscription(userRepository.findById(userId).get(), group)
         subscribeRepository.saveAndFlush(subscription)
         return ResponseEntity.ok(gson.toJson(subscription))
-    }
+    }*/
 
     @GetMapping("/subscription/{group_id}")
     fun subscribeWithoutUser(@PathVariable(name = "group_id") groupId: Long,
-                            @RequestParam(name = "user_name", required = false) userName: String?,
-                            @RequestParam(name = "user_likes", required = false) likes: String?,
-                            @RequestParam(name = "user_dislikes", required = false) dislikes: String?): ResponseEntity<String> {
+                             @RequestParam(name = "user_name", required = false) userName: String?,
+                             @RequestParam(name = "user_likes", required = false) likes: String?,
+                             @RequestParam(name = "user_dislikes", required = false) dislikes: String?): ResponseEntity<String> {
         if (userName == null || likes == null || dislikes == null)
             return ResponseEntity.ok(gson.toJson(groupRepository.findById(groupId)))
         val user = userRepository.saveAndFlush(User(userName, likes, dislikes))
-        val subscription = subscribeRepository.saveAndFlush(Subscription(user=user, group=groupRepository.findById(groupId).get()))
+        val subscription = subscribeRepository.saveAndFlush(Subscription(user = user, group = groupRepository.findById(groupId).get()))
         return ResponseEntity.ok(gson.toJson(subscription))
     }
-    
+
     @GetMapping("/target/{user_id}")
-    fun getUserTarget(@PathVariable(name = "user_id") userId: Long) : ResponseEntity<User?> {
+    fun getUserTarget(@PathVariable(name = "user_id") userId: Long): ResponseEntity<User?> {
         val target = subscribeRepository.findById(userId).get().target
         if (target != null) {
             return ResponseEntity.ok(target)
@@ -64,7 +69,7 @@ class MainController @Autowired constructor(private val groupRepository: GroupRe
     }
 
     @GetMapping("/finish/{group_id}")
-    fun finishGroup(@PathVariable(name = "group_id") groupId: Long) : ResponseEntity<*> {
+    fun finishGroup(@PathVariable(name = "group_id") groupId: Long): ResponseEntity<*> {
         val group = groupRepository.findById(groupId).get()
         if (group.finished != null) {
             if (group.finished!!)
@@ -80,7 +85,7 @@ class MainController @Autowired constructor(private val groupRepository: GroupRe
 
         val derangement = randomDerangement(membersCount)
 
-        for(i in subscriptions.indices) {
+        for (i in subscriptions.indices) {
             subscriptions[i].target = subscriptions[derangement[i]].user
             subscribeRepository.saveAndFlush(subscriptions[i])
         }
