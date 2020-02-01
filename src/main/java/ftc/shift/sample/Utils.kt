@@ -4,7 +4,7 @@ import org.springframework.web.client.RestTemplate
 
 object Utils {
 
-    private const val BASE_URL = "https://secretsanta2020.herokuapp.com/subscription/"
+    private const val BASE_URL = "https://secretsanta2020.herokuapp.com/subscribe/"
 
     fun getLinkById(id: Long): String? {
         val longLink = BASE_URL + id
